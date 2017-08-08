@@ -1,0 +1,11 @@
+page-home {
+    button:active {
+        color: #ffffff;
+        background-color: #00c853 !important;
+        border-color: #19571c;
+    }
+
+    ion-list > ion-item {
+        background-color: rgba(0, 255, 0, 0.3) !important;
+    }
+}

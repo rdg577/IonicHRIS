@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      DavNor HRIS
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list no-lines *ngIf='userData'>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src='{{ userData.PhotoURL }}'>
+      </ion-avatar>
+      <p>{{ userData.Fullname }}<br />{{ userData.Designation }}<br />ID #: {{ userData.IdNo }}</p>
+    </ion-item>
+  </ion-list>
+
+  <div *ngFor='let item of items'>
+    <button ion-button block round outline (click)="gotoPage(item.Id)" [disabled]='item.TotalApplications == 0'>
+      {{ item.Title }} &nbsp;<ion-badge color="danger" *ngIf='item.TotalApplications > 0'>{{ item.TotalApplications }}</ion-badge>
+    </button>
+  </div>
+  
+  <ion-fab left bottom>
+    <button ion-fab color="primary"><ion-icon name="arrow-dropright"></ion-icon></button>
+    <ion-fab-list side="right">
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

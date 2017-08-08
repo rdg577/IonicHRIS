@@ -1,0 +1,33 @@
+<!--
+  Generated template for the RevertJustification page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Revert-Justification</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-card *ngFor='let item of items'>
+      <ion-card-header text-wrap>
+        <ion-item>
+          <ion-avatar item-start>
+            <img src='{{ hrisService.getUserImage(item.EIC) }}'/>
+          </ion-avatar>
+          {{ item.fullnameFirst }}
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content padding-top *ngFor='let detail of item.details'>
+        <button ion-button block outline (click)='displayDetail(detail.EIC, detail.month, detail.year, detail.period)'>
+          {{ detail.period == 0 ? 'Full Month' : detail.period == 1 ? '1st Half' : '2nd Half'}} of
+          {{ detail.monthyear }}
+        </button>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

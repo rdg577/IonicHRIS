@@ -1,0 +1,62 @@
+<!--
+  Generated template for the Passslip page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Pass Slip</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div *ngFor='let item of items; let i = index;'>
+     <ion-card>
+      <ion-card-header color='primary_dark'>
+        <ion-item text-wrap>
+          <ion-avatar item-start>
+            <img src='{{ hrisService.getUserImage(item.EIC) }}'/>
+          </ion-avatar>
+          {{ item.fullnameFirst }}
+        </ion-item>
+        <ion-item>
+          <ion-toggle [(ngModel)]="checkboxPassSlipTypes[i]"></ion-toggle>
+          <ion-label>Pass Slip Official?</ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content padding-top>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-1><ion-icon name="pin" icon-left></ion-icon></ion-col>
+            <ion-col col-11>{{ item.destination }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1><ion-icon name="clipboard" icon-left></ion-icon></ion-col>
+            <ion-col col-11>{{ item.purpose }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1><ion-icon name="clock" icon-left></ion-icon></ion-col>
+            <ion-col col-11>{{ item.timeOut }}</ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div><!-- 
+          <button ion-button (click)="action2(checkboxPassSlipTypes[i])">Try</button> -->
+          <button ion-button round color="secondary" icon-left (click)='action(item.recNo, 1, checkboxPassSlipTypes[i])'>
+            <ion-icon name="thumbs-up" ></ion-icon>
+          </button>
+          <button ion-button round color="light" icon-left (click)='action(item.recNo, 2, checkboxPassSlipTypes[i])'>
+            <ion-icon name="thumbs-down"></ion-icon>
+          </button>
+          <button ion-button round color="danger" icon-left (click)='action(item.recNo, 3, checkboxPassSlipTypes[i])'>
+            <ion-icon name="hand"></ion-icon>
+          </button>
+        </div>
+      </ion-card-content>
+    </ion-card> 
+  </div>
+</ion-content>
