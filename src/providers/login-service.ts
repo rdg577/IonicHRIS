@@ -3,10 +3,6 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
-import { NavController } from 'ionic-angular';
-
-import { LoginPage } from '../pages/login/login';
-
 /*
   Generated class for the LoginService provider.
 

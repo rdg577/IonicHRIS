@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { RevertJustificationPage } from '../revert-justification/revert-justification';
 import { HrisService } from '../../providers/hris-service';
 
@@ -22,7 +22,6 @@ export class RevertJustificationDetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private hrisService: HrisService,
-              private alertCtrl: AlertController,
               private toastCtrl: ToastController) {
 
     this.justi = new JustificationDetail();

@@ -15,7 +15,7 @@ export class HrisService {
 
   constructor(public http: Http) { 
     this.domainURL = 'http://222.127.105.70:333';
-    // this.domainURL = 'http://localhost';
+    // this.domainURL = 'http://172.16.199.105';
   }
 
   getUserImage(EIC) {

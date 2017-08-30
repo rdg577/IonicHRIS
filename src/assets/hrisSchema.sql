@@ -1,0 +1,1 @@
+-- CREATE TABLE IF NOT EXISTS justification(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,skill TEXT,yearsOfExperience INTEGER);

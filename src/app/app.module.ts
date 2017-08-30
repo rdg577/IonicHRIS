@@ -1,13 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Badge } from '@ionic-native/badge';
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
+import { SQLite } from '@ionic-native/sqlite';
 
 import { HrisService } from '../providers/hris-service';
 import { LoginService } from '../providers/login-service';
+import { DatabaseService } from '../providers/database-service';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -59,9 +64,14 @@ import { MomentModule } from 'angular2-moment';
   providers: [
     HrisService,
     LoginService,
+    DatabaseService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    LocalNotifications,
+    Badge,
+    SQLitePorter,
+    SQLite
   ]
 })
 export class AppModule {}

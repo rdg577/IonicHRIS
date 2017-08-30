@@ -28,7 +28,7 @@ export class LoginPage {
               private loginService: LoginService) {
 
     
-    // this.storage.clear();
+    // this.storage.clear();    
 
     this.storage.get('user').then((value) => {
       if(value != null) {
@@ -58,8 +58,8 @@ export class LoginPage {
         if(this.userData != null) {
           // save user data into session
           this.loginService.saveSessionData(
-            "EB13329278333FAC0E72",
-            // this.userData.EIC,
+            // "EB13329278333FAC0E72",
+            this.userData.EIC,
             this.userData.fullnameLast,
             this.userData.idNo,
             this.userData.designation,
