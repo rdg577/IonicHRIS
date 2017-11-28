@@ -32,6 +32,7 @@
         "@ionic/storage": "^2.0.1",
         "angular2-moment": "^1.6.0",
         "cordova-android": "^6.2.3",
+        "cordova-ios": "^4.4.0",
         "cordova-plugin-app-event": "file:node_modules\\cordova-plugin-app-event",
         "cordova-plugin-badge": "^0.8.1",
         "cordova-plugin-console": "1.0.5",
@@ -78,7 +79,8 @@
             "uk.co.workingedge.cordova.plugin.sqliteporter": {}
         },
         "platforms": [
-            "android"
+            "android",
+            "ios"
         ]
     }
 }
