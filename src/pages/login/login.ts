@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoginService } from '../../providers/login-service';
 import { HomePage } from '../home/home';
-/**
- * Generated class for the Login page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
+@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -58,8 +53,8 @@ export class LoginPage {
         if(this.userData != null) {
           // save user data into session
           this.loginService.saveSessionData(
-            // "EB13329278333FAC0E72",
-            this.userData.EIC,
+            "SS147441196635246908",
+            // this.userData.EIC,
             this.userData.fullnameLast,
             this.userData.idNo,
             this.userData.designation,
@@ -91,6 +86,8 @@ export class LoginPage {
      * SA168298389632EB9AD5
      * RE122721079481636D9E
      * RR205308603CFECEA977
+     * RM6859301145963C28CC
+     * SS147441196635246908
       */
   }
 

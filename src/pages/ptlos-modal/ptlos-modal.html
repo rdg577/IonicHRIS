@@ -1,0 +1,56 @@
+<ion-header>
+
+  <ion-navbar color="ptlos_color">
+    <ion-title>PTLOS Detail</ion-title>
+    <ion-buttons end>
+       <button ion-button (click)="close()">
+          <ion-icon name="close"></ion-icon>
+       </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+      <ion-grid>
+         <ion-row>
+            <ion-col col-12>
+               <ion-row class="row-spacer">
+                  <ion-col col-4 col-md-2>CONTROL #:</ion-col>
+                  <ion-col col-8 col-md-10 class="rounded-corner">{{ data.controlNo }}</ion-col>
+                  <ion-col col-4 col-md-2>APPLIED DATE:</ion-col>
+                  <ion-col col-8 col-md-10 class="rounded-corner">{{ data.date_applied }}</ion-col>
+               </ion-row>
+               <ion-row class="row-spacer">
+                  <ion-col col-4 col-md-2>PLACE:</ion-col>
+                  <ion-col col-8 col-md-10 class="rounded-corner">{{ data.destination }}</ion-col>
+               </ion-row>
+               <ion-row class="row-spacer">
+                  <ion-col col-4 col-md-2>PURPOSE:</ion-col>
+                  <ion-col col-8 col-md-10 class="rounded-corner">{{ data.purpose }}</ion-col>
+               </ion-row>
+               <ion-row class="row-spacer">
+                  <ion-col col-4 col-md-2>DEPARTURE:</ion-col>
+                  <ion-col col-8 col-md-10 class="rounded-corner">{{ data.departure }}</ion-col>
+               </ion-row>
+               <ion-row class="row-spacer">
+                  <ion-col col-4 col-md-2>ARRIVAL:</ion-col>
+                  <ion-col col-8 col-md-10 class="rounded-corner">{{ data.arrival }}</ion-col>
+               </ion-row>
+               <ion-row class="row-spacer">
+                  <ion-col col-4 col-md-2>RETURN:</ion-col>
+                  <ion-col col-8 col-md-10 class="rounded-corner">{{ data.official_return }}</ion-col>
+               </ion-row>
+            </ion-col>
+         </ion-row>
+         <ion-row>
+            <ion-col col-6>EMPLOYEE NAME</ion-col>
+            <ion-col col-6>DESIGNATION</ion-col>
+         </ion-row>
+         <ion-row *ngFor="let item of data.applicants" class="rounded-corner row-spacer">
+            <ion-col col-6>{{ item.fullnameFirst }}</ion-col>
+            <ion-col col-6>{{ item.designation }}</ion-col>
+         </ion-row>
+      </ion-grid>
+   </ion-content>

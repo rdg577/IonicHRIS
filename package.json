@@ -1,6 +1,6 @@
 {
     "name": "hris",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "author": "DavNor e-Governance Team",
     "homepage": "https://www.davaodelnorte.gov.ph/hris/",
     "private": true,
@@ -33,7 +33,6 @@
         "angular2-moment": "^1.6.0",
         "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
-        "cordova-plugin-app-event": "file:node_modules\\cordova-plugin-app-event",
         "cordova-plugin-badge": "^0.8.1",
         "cordova-plugin-console": "1.0.5",
         "cordova-plugin-device": "1.1.4",

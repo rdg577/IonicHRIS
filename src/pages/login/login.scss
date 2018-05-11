@@ -1,3 +1,42 @@
 page-login {
+   ion-content {
+      background-image: url('../assets/img/background.png');
+      background-repeat:no-repeat;
+      background-size: cover;
+      background-position:center;
+  }
+  
+   div.login {
+      padding: 5px 5px;
+      background-color: #eeeeee;
+      border-radius: 5px;
+   }
 
+   div.login > img {
+      border-radius: 10px 10px;
+   }
+
+   ion-img {
+      display:block;
+      margin:auto;
+   }
+
+   div.title {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #004883;
+   }
+
+   @media(max-width: 800px) {
+      div.title {
+         font-size: 2vmax;
+      }
+   }
+
+   @media(min-width: 1366px) {
+      div.title {
+         font-size: 1vmax;
+      }
+   }
 }

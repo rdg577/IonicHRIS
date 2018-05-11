@@ -27,6 +27,9 @@ import { RevertDtrPage } from '../pages/revert-dtr/revert-dtr';
 
 // for using the angular2-moment used for piping
 import { MomentModule } from 'angular2-moment';
+import { PassSlipModalPage } from '../pages/pass-slip-modal/pass-slip-modal';
+import { PtlosModalPage } from '../pages/ptlos-modal/ptlos-modal';
+import { HrisActionsService } from '../providers/hris-actions/hris-actions';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { MomentModule } from 'angular2-moment';
     JustificationDetailPage,
     RevertJustificationPage,
     RevertJustificationDetailPage,
-    RevertDtrPage
+    RevertDtrPage,
+    PassSlipModalPage,
+    PtlosModalPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,9 @@ import { MomentModule } from 'angular2-moment';
     JustificationDetailPage,
     RevertJustificationPage,
     RevertJustificationDetailPage,
-    RevertDtrPage
+    RevertDtrPage,
+    PassSlipModalPage,
+    PtlosModalPage
   ],
   providers: [
     HrisService,
@@ -71,7 +78,8 @@ import { MomentModule } from 'angular2-moment';
     LocalNotifications,
     Badge,
     SQLitePorter,
-    SQLite
+    SQLite,
+    HrisActionsService
   ]
 })
 export class AppModule {}

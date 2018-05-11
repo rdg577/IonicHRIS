@@ -35,13 +35,30 @@ $toolbar-background: #42a045;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:      #42a045,
-  primary_dark: #19571c,
-  secondary:    #32db64,
-  danger:       #f53d3d,
-  light:        #f4f4f4,
-  dark:         #222,
-  accent:       #00c853
+  primary:        #2196f3,
+  primary_dark:   #0069c0,
+  primary_light:  #6ec6ff,
+  secondary:      #ff9800,
+  secondary_dark: #c66900,
+  secondary_light: #ffc947,
+  success:        #03a653,
+  info:           #00A3B6,
+  warning:        #ff6f00,
+  danger:         #E43247,
+  accent:         #00c853,
+
+  dtr_color:      #488EEE,
+  pass_slip_color:#E2534D,
+  justification_color: #00A166,
+  ptlos_color:    #FFCC5E,
+
+  approve:        #8bc34a,
+  disapprove:     #E43247,
+  return:         #ef5350,
+  cancel:         #6C757C,
+  revert:         #ffee58,
+
+  list:           #ffffff
 );
 
 

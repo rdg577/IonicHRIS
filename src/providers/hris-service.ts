@@ -2,20 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the HrisService provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class HrisService {
 
   domainURL: String;
 
   constructor(public http: Http) { 
-    this.domainURL = 'http://222.127.105.70:333';
-    // this.domainURL = 'http://172.16.199.105';
+   //  this.domainURL = 'http://222.127.105.70:333';
+    this.domainURL = 'http://192.168.56.102';
   }
 
   getUserImage(EIC) {
@@ -35,7 +29,7 @@ export class HrisService {
 
   getDTRRevertRequest(EIC) {
     let params = {approvingEIC: EIC};
-    let url = this.domainURL + '/WebService/DTR/DTRReturnRequest';
+    let url = this.domainURL + '/WebService/DTR/DTRReturnRequest2';
     return this.http.post(url, params).map(res => res.json());
   }
 
@@ -82,7 +76,7 @@ export class HrisService {
 
   getJustification(EIC) {
     let params = {approvingEIC: EIC};
-    let url = this.domainURL + '/WebService/Justification/JustificationPending2';
+    let url = this.domainURL + '/WebService/Justification/JustificationPending3';
     return this.http.post(url, params).map(res => res.json());
   }
 
@@ -94,7 +88,7 @@ export class HrisService {
 
   getPtlosForApproval(EIC) {
     let params = {approvingEIC: EIC};
-    let url = this.domainURL + '/WebService/PTLOS/PTLOSDetail2';
+    let url = this.domainURL + '/WebService/PTLOS/PTLOSDetail3';
     return this.http.post(url, params).map(res => res.json());
   }
 

@@ -35,7 +35,10 @@ export class RevertDtrPage {
           title: 'Confirm Return DTR Action',
           message: 'Do you want to continue your action?',
           buttons: [
-            { text: 'Cancel', role: 'cancel'},
+            { 
+               text: 'Cancel', 
+               role: 'cancel'
+            },
             {
               text: 'Yes, proceed!',
               handler: data => {

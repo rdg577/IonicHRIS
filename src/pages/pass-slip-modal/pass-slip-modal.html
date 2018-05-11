@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar color="pass_slip_color">
+    <ion-title>Pass Slip Detail</ion-title>
+    <ion-buttons end>
+       <button ion-button (click)="close()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+   <ion-grid>
+      <ion-row>
+         <ion-col col-12><h1>{{ data.fullnameFirst }}</h1></ion-col>
+         <ion-col col-12 class="rounded-corner row-spacer"><h5>{{ data.purpose }}</h5></ion-col>
+         <ion-col col-4>PLACE:</ion-col>
+         <ion-col col-8 class="rounded-corner row-spacer">{{ data.destination }}</ion-col>
+         <ion-col col-4>TIME OUT:</ion-col>
+         <ion-col col-8 class="rounded-corner row-spacer">{{ data.timeOut }}</ion-col>
+         <ion-col col-4>TIME IN:</ion-col>
+         <ion-col col-8 class="rounded-corner row-spacer">{{ data.timeIn }}</ion-col>
+      </ion-row>
+   </ion-grid>
+</ion-content>
