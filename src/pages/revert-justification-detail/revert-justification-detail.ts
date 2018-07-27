@@ -20,36 +20,37 @@ export class RevertJustificationDetailPage {
   justi: any;
   remarks: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              private hrisService: HrisService,
-              private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, 
+      public navParams: NavParams,
+      private toastCtrl: ToastController) {
 
     this.justi = new JustificationDetail();
+    
   }
 
   finalAction(EIC, month, year, month_year, approveEIC, statusID, period, remarks) {
-    this.hrisService.doJustificationApproval(EIC, month, year, month_year, 
-                                              approveEIC, statusID, period, 
-                                              remarks).subscribe(
-      result => {
-        if(result.justification_approval.has_error) {
-          this.presentToast('Error encountered while approving justification, please try again.', 3000, 'bottom');
-        } else {
-          this.presentToast('Justification has been reverted.', 2000, 'bottom');
-        }
-      },
-      error => {
-        this.presentToast(error, 3000, 'bottom');
-      },
-      () => {
+    // this.hrisService.doJustificationApproval(EIC, month, year, month_year, 
+    //                                           approveEIC, statusID, period, 
+    //                                           remarks).subscribe(
+    //   result => {
+    //     if(result.justification_approval.has_error) {
+    //       this.presentToast('Error encountered while approving justification, please try again.', 3000, 'bottom');
+    //     } else {
+    //       this.presentToast('Justification has been reverted.', 2000, 'bottom');
+    //     }
+    //   },
+    //   error => {
+    //     this.presentToast(error, 3000, 'bottom');
+    //   },
+    //   () => {
 
-      }
-    );
+    //   }
+    // );
   }
 
   action(EIC, month, year, month_year, approveEIC, statusID, period) {
     this.remarks = 'Reverted as per request';
-    this.finalAction(EIC, month, year, month_year, approveEIC, statusID, period, this.remarks);    
+    // this.finalAction(EIC, month, year, month_year, approveEIC, statusID, period, this.remarks);    
   }
   
   presentToast(message, duration, position) {

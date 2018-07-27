@@ -23,7 +23,6 @@ export class JustificationDetailPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private toastCtrl: ToastController,
-              private hrisService: HrisService,
               private alertCtrl: AlertController) {
 
     this.justi = new JustificationDetail();
@@ -31,27 +30,27 @@ export class JustificationDetailPage {
   }
 
   finalAction(EIC, month, year, month_year, approveEIC, statusID, period, remarks) {
-    this.hrisService.doJustificationApproval(EIC, month, year, month_year, 
-                                              approveEIC, statusID, period, 
-                                              remarks).subscribe(
-      result => {
-        if(result.justification_approval.has_error) {
-          this.presentToast('Error encountered while approving justification, please try again.', 3000, 'bottom');
-        } else {
-          if(statusID == 1) {
-            this.presentToast('Justification approved!', 2000, 'bottom');
-          } else {
-            this.presentToast('Justification has been returned.', 2000, 'bottom');
-          }
-        }
-      },
-      error => {
-        this.presentToast(error.err, 3000, 'bottom');
-      },
-      () => {
+    // this.hrisService.doJustificationApproval(EIC, month, year, month_year, 
+    //                                           approveEIC, statusID, period, 
+    //                                           remarks).subscribe(
+    //   result => {
+    //     if(result.justification_approval.has_error) {
+    //       this.presentToast('Error encountered while approving justification, please try again.', 3000, 'bottom');
+    //     } else {
+    //       if(statusID == 1) {
+    //         this.presentToast('Justification approved!', 2000, 'bottom');
+    //       } else {
+    //         this.presentToast('Justification has been returned.', 2000, 'bottom');
+    //       }
+    //     }
+    //   },
+    //   error => {
+    //     this.presentToast(error.err, 3000, 'bottom');
+    //   },
+    //   () => {
 
-      }
-    );
+    //   }
+    // );
   }
 
   action(EIC, month, year, month_year, approveEIC, statusID, period) {
@@ -72,7 +71,7 @@ export class JustificationDetailPage {
               text: 'Submit',
               handler: data => {
                 this.remarks = data.remarks;
-                this.finalAction(EIC, month, year, month_year, approveEIC, statusID, period, this.remarks);
+                // this.finalAction(EIC, month, year, month_year, approveEIC, statusID, period, this.remarks);
               }
             }
           ]

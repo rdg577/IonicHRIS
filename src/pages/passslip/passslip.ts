@@ -32,6 +32,8 @@ export class PassslipPage {
     return tag == 2 ? true : false;
   }
 
+  
+
   presentToast(message, duration, position) {
     let toast = this.toastCtrl.create({
       message: message,

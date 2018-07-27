@@ -19,7 +19,6 @@ export class PtlosModalPage {
 
    ionViewWillLoad() {
       this.data = this.navParams.get("data");
-      console.log(this.data);
    }
 
    ionViewDidLoad() {

@@ -12,13 +12,10 @@ page-login {
       border-radius: 5px;
    }
 
-   div.login > img {
-      border-radius: 10px 10px;
-   }
-
    ion-img {
       display:block;
       margin:auto;
+      height: 110px;
    }
 
    div.title {
@@ -32,6 +29,14 @@ page-login {
       div.title {
          font-size: 2vmax;
       }
+   }
+
+   @media(min-width: 576px) {
+        ion-img {
+            display:block;
+            margin:auto;
+            height: 110px;
+        }
    }
 
    @media(min-width: 1366px) {

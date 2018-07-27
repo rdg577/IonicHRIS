@@ -11,34 +11,35 @@
 
     <ion-grid>
         <ion-row>
-            <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
-                <div class="login">
+            <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3>
+                
+                    <div class="login">
+                        <div>
+                            <ion-img src='assets/img/hrislogo.png'></ion-img>
+                        </div>
+                        
+                        <div class="title">
+                            <span>Human Resource Information System</span>
+                        </div>
 
-                  <ion-img width="50%" src="../assets/img/hrislogo.png"></ion-img>
+                        <ion-list>
+                            <ion-item>
+                                <ion-label floating>Username</ion-label>
+                                <ion-input type="text" [(ngModel)]="username"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label floating>Password</ion-label>
+                                <ion-input type="password" [(ngModel)]="password"></ion-input>
+                            </ion-item>
+                        </ion-list>
 
-                  <div class="title">
-                        <span>Human Resource Information System</span>
-                  </div>
-                  
+                        <div>
+                            <button ion-button block (click)='login(username, password)'>
+                                Login
+                            </button>
+                        </div>
 
-                  <ion-list>
-                     <ion-item>
-                        <ion-label stacked>Username</ion-label>
-                        <ion-input type="text" [(ngModel)]="username"></ion-input>
-                     </ion-item>
-                     <ion-item>
-                        <ion-label stacked>Password</ion-label>
-                        <ion-input type="password" [(ngModel)]="password"></ion-input>
-                     </ion-item>
-                  </ion-list>
-
-                  <div>
-                     <button ion-button block (click)='login(username, password)'>
-                        Login
-                     </button>
-                  </div>
-
-                </div>
+                    </div>
 
             </ion-col>
         </ion-row>

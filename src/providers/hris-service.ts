@@ -8,8 +8,18 @@ export class HrisService {
   domainURL: String;
 
   constructor(public http: Http) { 
-   //  this.domainURL = 'http://222.127.105.70:333';
-    this.domainURL = 'http://192.168.56.102';
+    // this.domainURL = 'http://192.168.56.102';
+  }
+
+  logNotification(moduleName, status, remarks, approvingEIC, ctrlNo) {
+    let params = {moduleName: moduleName, 
+      status: status, 
+      actionEic: approvingEIC, 
+      remarks: remarks,
+      ctrlNo: ctrlNo
+    };
+    let url = this.domainURL + '/WebService/Toolbox/Notify';
+    return this.http.post(url, params).map(res => res.json());
   }
 
   getUserImage(EIC) {
@@ -49,18 +59,13 @@ export class HrisService {
     return this.http.post(url, params).map(res => res.json());
   }
 
-  doJustificationApproval(EIC, month, year, month_year, approvingEIC, statusID, period, remarks) {
+  doJustificationApproval(recNo, statusID, remarks) {
     let params = {
-      EIC: EIC,
-      month: month,
-      year: year,
-      month_year: month_year,
-      approvingEIC: approvingEIC,
+      recNo: recNo,
       statusID: statusID,
-      period: period,
       remarks: remarks
     };
-    let url = this.domainURL + '/WebService/Justification/JustificationApproval';
+    let url = this.domainURL + '/WebService/Justification/JustificationApproval2';
     return this.http.post(url, params).map(res => res.json());
   }
 
@@ -79,7 +84,7 @@ export class HrisService {
     let url = this.domainURL + '/WebService/Justification/JustificationPending3';
     return this.http.post(url, params).map(res => res.json());
   }
-
+  
   doPtlosApproval(recNo, tag) {
     let params = {id: recNo, tag: tag};
     let url = this.domainURL + '/WebService/PTLOS/PTLOSApproval';
@@ -100,13 +105,13 @@ export class HrisService {
 
   getPassSlipForApproval(EIC) {
     let params = {approvingEIC: EIC};
-    let url = this.domainURL + '/WebService/PassSlip/PassSlipDetail2';
+    let url = this.domainURL + '/WebService/PassSlip/PassSlipDetail3';
     return this.http.post(url, params).map(res => res.json());
   }
 
   getMenus(EIC) {
     let params = {approvingEIC: EIC};
-    let url = this.domainURL + '/WebService/Toolbox/GetAllApplications';
+    let url = this.domainURL + '/WebService/Toolbox/GetAllApplications2';
     return this.http.post(url, params).map(res => res.json());
   }
 

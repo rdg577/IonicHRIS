@@ -23,22 +23,30 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-card *ngIf="userData" col-12 col-md-2 offset-md-5>
-    <div class="hulagway"><img src='{{ userData.PhotoURL }}' /></div>
-    <ion-card-content>
-      <ion-card-title color="primary_dark">
-        {{ userData.Fullname }}
-      </ion-card-title>
-      <p>{{ userData.Designation }}</p>
-      <p>ID #: {{ userData.IdNo }}</p>
-    </ion-card-content>
-   </ion-card>
-
   <ion-grid no-padding>
     <ion-row no-padding>
 
+        <!-- USER PROFILE -->
+        <ion-col  col-12 col-md-6 offset-md-3>
+            <ion-card no-padding *ngIf="userData">
+  
+                <img src='{{ userData.PhotoURL }}' />
+                
+                <ion-card-content>
+                  <ion-card-title color="primary_dark">
+                    {{ userData.Fullname }}
+                  </ion-card-title>
+                  <p>ID #: {{ userData.IdNo }} | {{ userData.Designation }}</p>
+                </ion-card-content>
+            
+              </ion-card>
+        </ion-col>
+
+    </ion-row>
+    <ion-row no-padding>
+
       <!-- DAILY TIME RECORD -->
-      <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6>
         <ion-card no-padding>
           <ion-card-header color="dtr_color" ion-item>
             <ion-icon name="calendar" large item-start></ion-icon>
@@ -69,7 +77,7 @@
               </ion-item-sliding>
 
 
-              <ion-list *ngIf="item.details && item.open">
+              <ion-list>
                 <ion-list-header  *ngFor="let detail of item.details" no-lines no-padding>
                   <ion-item-sliding (ionSwipe)="returnDTR(detail)">
                     <ion-item ion-item detail-none class="child-item" text-wrap>
@@ -77,7 +85,7 @@
                       <h5>{{ detail.Remarks }}</h5>
                     </ion-item>
                     <ion-item-options side="left">
-                      <button ion-button expandable color="return" (click)="returnDTR(item.details, detail)">
+                      <button ion-button expandable color="return" (click)="returnDTR(item, detail)">
                         <ion-icon name="arrow-dropleft"></ion-icon>
                         RETURN
                       </button>
@@ -93,50 +101,84 @@
       <!-- end -> DAILY TIME RECORD -->
 
       <!-- PASS SLIP -->
-      <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6>
         <ion-card>
             <ion-card-header ion-item color="pass_slip_color">
               <ion-icon name="paper" large item-start></ion-icon>
               <ion-card-title>Pass Slip</ion-card-title>
               <ion-badge color="secondary" item-end *ngIf="PassSlips && PassSlips.length > 0">{{ PassSlips.length }}</ion-badge>
             </ion-card-header>
-            <ion-list *ngFor="let item of PassSlips">
-              <ion-item-sliding>
-                  <ion-item (click)="showPassSlipDetail(item)">
+
+            <ion-list class="accordion-list">
+              <ion-list-header *ngFor="let item of PassSlips; let i = index" no-lines no-padding>
+                <ion-item-sliding *ngIf="item.details && item.details.length > 0">
+                  <button ion-item (click)="togglePassSlipSection(i)" detail-none [ngClass]="{'section-active':item.open, 'section': !item.open}">
                     <ion-avatar item-start>
-                        <img src='{{ getURLImage(item.EIC) }}'>
+                      <img src='{{ getURLImage(item.EIC) }}'>
                     </ion-avatar>
-                    <h4>{{ item.fullnameFirst }}</h4>
-                    <p>{{ item.purpose }}</p>
-                  </ion-item>
+                    <h4>{{ item.fullnameLast }}</h4>
+                    <ion-icon item-right name="arrow-dropright" *ngIf="!item.open"></ion-icon>
+                    <ion-icon item-right name="arrow-dropdown" *ngIf="item.open"></ion-icon>
+                  </button>
                   <ion-item-options side="left">
-                    <button ion-button color="approve">
+                    <button ion-button color="approve" (click)="doPassSlipActionAll(item, 1)">
                         <ion-icon name="thumbs-up"></ion-icon>
-                        APPROVE
+                        APPROVE ALL
                     </button>
-                    <button ion-button color="disapprove">
+                    <button ion-button color="disapprove" (click)="doPassSlipActionAll(item, 2)">
                         <ion-icon name="thumbs-down"></ion-icon>
-                        DISAPPROVE
+                        DISAPPROVE ALL
                     </button>
                   </ion-item-options>
                   <ion-item-options side="right">
-                    <button ion-button color="cancel">
+                    <button ion-button color="cancel" (click)="doPassSlipActionAll(item, 3)">
                         <ion-icon name="hand"></ion-icon>
-                        CANCEL
-                    </button>
-                    <button ion-button color="info" (click)="showPassSlipDetail(item)">
-                        <ion-icon name="list-box"></ion-icon>
-                        DETAIL
+                        CANCEL ALL
                     </button>
                   </ion-item-options>
-              </ion-item-sliding>
+                </ion-item-sliding>
+
+                <ion-list *ngIf="item.details && item.open">
+                    <ion-list-header  *ngFor="let detail of item.details" no-lines no-padding>
+                      <ion-item-sliding>
+                          <ion-item padding (click)="showPassSlipDetail(detail)">
+                            <ion-icon item-left name="list-box"></ion-icon>
+                            <h5>{{ detail.purpose }}</h5>
+                            <p>{{ detail.destination }}</p>
+                            <p>Time Out: {{ detail.timeOut }}</p>
+                            <p>Time In: {{ detail.timeIn }}</p>
+                          </ion-item>
+                          <ion-item-options side="left">
+                            <button ion-button color="approve" (click)="doPassSlipAction(item, detail, 1)">
+                                <ion-icon name="thumbs-up"></ion-icon>
+                                APPROVE
+                            </button>
+                            <button ion-button color="disapprove" (click)="doPassSlipAction(item, detail, 2)">
+                                <ion-icon name="thumbs-down"></ion-icon>
+                                DISAPPROVE
+                            </button>
+                          </ion-item-options>
+                          <ion-item-options side="right">
+                            <button ion-button color="cancel" (click)="doPassSlipAction(item, detail, 3)">
+                                <ion-icon name="hand"></ion-icon>
+                                CANCEL
+                            </button>
+                            <button ion-button color="info" (click)="showPassSlipDetail(detail)">
+                                <ion-icon name="list-box"></ion-icon>
+                                DETAIL
+                            </button>
+                          </ion-item-options>
+                      </ion-item-sliding>
+                    </ion-list-header>
+                </ion-list>
+              </ion-list-header>
             </ion-list>
         </ion-card>
       </ion-col>            
       <!-- end -> PASS SLIP -->       
 
       <!-- JUSTIFICATION -->
-      <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6>
         <ion-card>
             <ion-card-header ion-item color="justification_color">
               <ion-icon name="clipboard" large item-start></ion-icon>
@@ -149,17 +191,17 @@
                   <!-- First Level -->
                   <ion-list-header *ngFor="let item of Justifications; let i = index" no-lines no-padding>
 
-                    <ion-item-sliding>
+                    <ion-item-sliding *ngIf="(item.forApproval && item.forApproval.length > 0) || (item.forRevert && item.forRevert.length > 0)">
                         <button ion-item (click)="toggleJustificationSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
                           <ion-avatar item-start>
                               <img src='{{ getURLImage(item.EIC) }}'>
                           </ion-avatar>
-                          <h4>{{item.fullnameFirst}}</h4>
+                          <h4>{{item.fullnameLast}}</h4>
                           <ion-icon item-right name="arrow-dropright" *ngIf="!item.open"></ion-icon>
                           <ion-icon item-right name="arrow-dropdown" *ngIf="item.open"></ion-icon>
                         </button>
-                        <ion-item-options side="left">
-                          <button ion-button color="approve">
+                        <ion-item-options side="left" *ngIf="item.forApproval.length > 0"  (ionSwipe)="doJustificationActionAll(item, 1)">
+                          <button ion-button expandable color="approve">
                               <ion-icon name="thumbs-up"></ion-icon>
                               APPROVE ALL
                           </button>
@@ -168,8 +210,8 @@
                               RETURN ALL
                           </button>
                         </ion-item-options>
-                        <ion-item-options side="right" *ngIf="item.forRevert.length > 0">
-                          <button ion-button color="revert">
+                        <ion-item-options side="right" *ngIf="item.forRevert.length > 0"  (ionSwipe)="doJustificationActionAll(item, 2)">
+                          <button ion-button expandable color="revert"  (click)="doJustificationActionAll(item, 2)">
                               <ion-icon name="rewind"></ion-icon>
                               REVERT ALL
                           </button>
@@ -178,46 +220,52 @@
 
 
                     <ion-list *ngIf="item.forApproval && item.open">
-                        <ion-list-header  *ngFor="let detail of item.forApproval" no-lines no-padding>
-                          <ion-item-sliding>
+                        <ion-list-header  no-lines no-padding>
+
+                          <!-- JUSTIFICATION APPROVAL -->
+                          <ion-item-sliding *ngFor="let detail of item.forApproval">
                               <ion-item ion-item detail-none class="child-item" text-wrap>
                                 <ion-icon item-left name="list-box"></ion-icon>
                                 <h5>{{ detail.month }}/{{ detail.day }}/{{ detail.year }}</h5>
                                 <h6>{{ detail.logTitle }} {{ detail.time }}</h6>
                                 <p>{{ detail.reason }}</p>
                               </ion-item>
-                              <ion-item-options side="left">
-                                <button ion-button color="approve">
+                              <ion-item-options side="left"  (ionSwipe)="doJustificationAction(item, detail, 1)">
+                                <button ion-button expandable color="approve" (click)="doJustificationAction(item, detail, 1)">
                                     <ion-icon name="thumbs-up"></ion-icon>
                                     APPROVE
                                 </button>
-                                <button ion-button color="return">
+                                <button ion-button color="return" (click)="doJustificationAction(item, detail, 0)">
                                     <ion-icon name="arrow-dropleft"></ion-icon>
                                     RETURN
                                 </button>
                               </ion-item-options>
                           </ion-item-sliding>
-                        </ion-list-header>
-                    </ion-list> 
 
-                    <ion-list *ngIf="item.forRevert && item.open">
-                        <ion-list-header  *ngFor="let detail of item.forRevert" no-lines no-padding>
-                          <ion-item-sliding>
+                          <!-- JUSTIFICATION REVERT -->
+                          <ion-item-sliding  *ngFor="let detail of item.forRevert">
                               <ion-item ion-item detail-none class="child-item" text-wrap>
-                                <ion-icon item-left name="list-box"></ion-icon>
+                                <ion-icon item-left name="undo"></ion-icon>
                                 <h5>{{ detail.month }}/{{ detail.day }}/{{ detail.year }}</h5>
                                 <h6>{{ detail.logTitle }} {{ detail.time }}</h6>
                                 <p>{{ detail.reason }}</p>
                               </ion-item>
-                              <ion-item-options side="left">
-                                <button ion-button color="revert">
+                              <ion-item-options side="right"  (ionSwipe)="doJustificationAction(item, detail, 2)">
+                                <button ion-button expandable color="revert" (click)="doJustificationAction(item, detail, 2)">
                                     <ion-icon name="rewind"></ion-icon>
                                     REVERT
                                 </button>
                               </ion-item-options>
                           </ion-item-sliding>
+
+
                         </ion-list-header>
-                    </ion-list>                         
+                    </ion-list> 
+
+                    <!-- <ion-list *ngIf="item.forRevert && item.open">
+                        <ion-list-header no-lines no-padding>
+                        </ion-list-header>
+                    </ion-list>                          -->
                   </ion-list-header>
             </ion-list>
         </ion-card>
@@ -225,7 +273,7 @@
       <!-- end -> JUSTIFICATION -->
 
       <!-- PTLOS -->
-      <ion-col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6>
         <ion-card>
             <ion-card-header ion-item color="ptlos_color">
               <ion-icon name="jet" large item-start></ion-icon>
@@ -234,27 +282,27 @@
             </ion-card-header>
             <ion-list *ngFor="let item of PTLOS">
               <ion-item-sliding>
-                  <ion-item padding (click)="showPtlosDetail(item)">
+                  <ion-item padding>
                     <h4>{{ item.name }}</h4>
                     <p>{{ item.purpose }}</p>
                     <p>{{ item.destination }}</p>
                   </ion-item>
-                  <ion-item-options side="left">
-                    <button ion-button color="approve">
+                  <ion-item-options side="left" (ionSwipe)="doPTLOSAction(item, 5)">
+                    <button ion-button expandable color="approve" (click)="doPTLOSAction(item, 5)">
                         <ion-icon name="thumbs-up"></ion-icon>
                         APPROVE
                     </button>
-                    <button ion-button color="disapprove">
+                    <button ion-button color="disapprove" (click)="doPTLOSAction(item, 6)">
                         <ion-icon name="thumbs-down"></ion-icon>
                         DISAPPROVE
                     </button>
                   </ion-item-options>
-                  <ion-item-options side="right">
-                    <button ion-button color="cancel">
+                  <ion-item-options side="right" (ionSwipe)="showPtlosDetail(item)">
+                    <button ion-button color="cancel" (click)="doPTLOSAction(item, 0)">
                         <ion-icon name="hand"></ion-icon>
-                        CANCEL
+                        RETURN
                     </button>
-                    <button ion-button color="info" (click)="showPtlosDetail(item)">
+                    <button ion-button expandable color="info" (click)="showPtlosDetail(item)">
                         <ion-icon name="list-box"></ion-icon>
                         DETAIL
                     </button>
@@ -269,11 +317,12 @@
   </ion-grid>
   
   <ion-fab right bottom>
-    <button ion-fab color="secondary"><ion-icon name="create"></ion-icon></button>
+    <button ion-fab color="secondary_dark"><ion-icon name="create"></ion-icon></button>
     <ion-fab-list side="top">
-      <button ion-fab (click)="console.log('new justi...')" color="justification_color"><ion-icon name="clipboard"></ion-icon></button>
-      <button ion-fab (click)="console.log('new ptlos...')" color="ptlos_color"><ion-icon name="jet"></ion-icon></button>
-      <button ion-fab (click)="console.log('new pass slip...')" color="pass_slip_color"><ion-icon name="paper"></ion-icon></button>
+      <button ion-fab (click)="forcedRefresh()" color="secondary"><ion-icon name="refresh"></ion-icon></button>
+      <button ion-fab (click)="notYetImplemented('PTLOS')" color="ptlos_color"><ion-icon name="jet"></ion-icon></button>
+      <button ion-fab (click)="notYetImplemented('PASS SLIP')" color="pass_slip_color"><ion-icon name="paper"></ion-icon></button>
+      <button ion-fab (click)="notYetImplemented('JUSTIFICATION')" color="justification_color"><ion-icon name="clipboard"></ion-icon></button>
    </ion-fab-list>
   </ion-fab>
 
